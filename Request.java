@@ -26,20 +26,24 @@ public class Request {
     public void approve(Employee approver){
         if(!approver.isManager()){
             throw new IllegalStateException(
-                "「" + status.getLabel() + "」の申請は承認できません");
+            approver.getName() + "さんは上長ではないため承認できません");
         }
         if(status != RequestStatus.SUBMITTED){
             throw new IllegalStateException(
-                "「" + status.getLabel() + "」の申請は承認できません");
+            "「" + status.getLabel() + "」の申請は承認できません");
         }
         status = RequestStatus.APPROVED;
     }
 
     // 指し戻す（申請中の時だけ）
-    public void reject(){
-        if(status !=RequestStatus.SUBMITTED){
+    public void reject(Employee approver){
+        if(!approver.isManager()){
             throw new IllegalStateException(
-                "「" + status.getLabel() + "」の申請は差し戻せません");
+            approver.getName() + "さんは上長でないため差し戻せません");
+        }
+        if(status != RequestStatus.SUBMITTED){
+            throw new IllegalStateException(
+            "「" + status.getLabel() + "」の申請は差し戻しできません");
         }
         status = RequestStatus.REJECTED;
     }

@@ -16,5 +16,26 @@ public class Main {
         // 上長が承認する → 成功
         req.approve(tanaka);
         System.out.println("状態: " + req.getStatus().getLabel());
+
+                // 差し戻しのテスト
+        Request req2 = new Request(2, yamada, "モニター", 30000);
+        req2.submit();
+
+        try {
+            req2.reject(yamada);   // 一般社員 → エラーになるはず
+        } catch (IllegalStateException e) {
+            System.out.println("エラー: " + e.getMessage());
+        }
+
+        req2.reject(tanaka);       // 上長 → 成功するはず
+        System.out.println("状態: " + req2.getStatus().getLabel());
+
+        Request req3 = new Request(3, yamada, "キーボード", 5000);
+        try {
+            req3.reject(tanaka);
+        } catch (IllegalStateException e) {
+            System.out.println("エラー: " + e.getMessage());
+        }
     }
+    
 }
