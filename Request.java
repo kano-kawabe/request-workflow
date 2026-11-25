@@ -1,13 +1,13 @@
 public class Request {
     private int id;
-    private String applicantName;
+    private Employee applicant;
     private String itemName;
     private int amount;
     private RequestStatus status;
 
-    public Request(int id, String applicantName, String itemName, int amount){
+    public Request(int id, Employee applicant, String itemName, int amount){
         this.id = id;
-        this.applicantName = applicantName;
+        this.applicant = applicant;
         this.itemName = itemName;
         this.amount = amount;
         this.status = RequestStatus.DRAFT; // 作成時は必ず下書き
@@ -23,8 +23,12 @@ public class Request {
     }
 
     // 承認する（申請中の時だけ）
-    public void approve(){
-        if(status !=RequestStatus.SUBMITTED){
+    public void approve(Employee approver){
+        if(!approver.isManager()){
+            throw new IllegalStateException(
+                "「" + status.getLabel() + "」の申請は承認できません");
+        }
+        if(status != RequestStatus.SUBMITTED){
             throw new IllegalStateException(
                 "「" + status.getLabel() + "」の申請は承認できません");
         }
@@ -50,7 +54,7 @@ public class Request {
     }
 
     public int getID() {return id;}
-    public String getApplicantName(){return applicantName;}
+    public Employee getApplicant(){return applicant;}
     public String getItemName(){return itemName;}
     public int getAmount(){return amount;}
     public RequestStatus getStatus(){return status;}
