@@ -32,6 +32,10 @@ public class Request {
             throw new IllegalStateException(
             "「" + status.getLabel() + "」の申請は承認できません");
         }
+        if(applicant.getId() == approver.getId()){
+            throw new IllegalStateException(
+                "自分の申請は承認できません");
+        }
         status = RequestStatus.APPROVED;
     }
 

@@ -36,6 +36,14 @@ public class Main {
         } catch (IllegalStateException e) {
             System.out.println("エラー: " + e.getMessage());
         }
+
+        Request req4 = new Request(4, tanaka, "プリンター", 40000);
+        req4.submit();
+        try {
+            req4.approve(tanaka);   // 自分の申請を自分で承認 → エラーになるはず
+        } catch (IllegalStateException e) {
+            System.out.println("エラー: " + e.getMessage());
+        }
     }
     
 }

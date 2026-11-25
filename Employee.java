@@ -13,7 +13,7 @@ public class Employee {
         return role == Role.MANAGER;
     }
 
-    public int getID() { return id;}
+    public int getId() { return id;}
     public String getName() { return name;}
     public Role getRole() { return role;}
     
