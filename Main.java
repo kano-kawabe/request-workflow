@@ -50,5 +50,13 @@ public class Main {
         } catch (IllegalStateException e) {
             System.out.println("エラー: " + e.getMessage());
         }
+
+        for (ApprovalHistory h : req.getHistories()) {
+            System.out.println(h.getDateTime() + " " + h.getActor().getName() + " " + h.getAction());
+        }
+
+        for (ApprovalHistory h : req2.getHistories()) {
+            System.out.println(h.getDateTime() + " " + h.getActor().getName() + " " + h.getAction());
+        }
     }
 }
