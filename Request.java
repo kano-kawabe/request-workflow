@@ -45,10 +45,17 @@ public class Request {
             throw new IllegalStateException(
             approver.getName() + "さんは上長でないため差し戻せません");
         }
+
+        if(applicant.getId() == approver.getId()){
+            throw new IllegalStateException(
+                "自分の申請は差し戻せません");
+        }
+
         if(status != RequestStatus.SUBMITTED){
             throw new IllegalStateException(
             "「" + status.getLabel() + "」の申請は差し戻しできません");
         }
+
         status = RequestStatus.REJECTED;
     }
 

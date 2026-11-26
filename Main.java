@@ -44,6 +44,11 @@ public class Main {
         } catch (IllegalStateException e) {
             System.out.println("エラー: " + e.getMessage());
         }
+
+        try {
+            req4.reject(tanaka);   // 自分の申請を自分で差し戻す → エラーになるはず
+        } catch (IllegalStateException e) {
+            System.out.println("エラー: " + e.getMessage());
+        }
     }
-    
 }
