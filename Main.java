@@ -58,5 +58,9 @@ public class Main {
         for (ApprovalHistory h : req2.getHistories()) {
             System.out.println(h.getDateTime() + " " + h.getActor().getName() + " " + h.getAction());
         }
+
+        for (ApprovalHistory h : req.getHistories()){
+            System.out.println(h.getFormattedDateTime() + " " + h.getActor().getName() + " " + h.getAction());
+        }
     }
 }

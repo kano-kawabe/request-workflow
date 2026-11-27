@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 public class ApprovalHistory {
@@ -14,4 +15,8 @@ public class ApprovalHistory {
     public Employee getActor() {return actor;}
     public String getAction() {return action;}
     public LocalDateTime getDateTime() {return dateTime;}
+    public String getFormattedDateTime(){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        return dateTime.format(fmt);
+    }
 }
