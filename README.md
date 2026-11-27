@@ -26,7 +26,7 @@
 
 ## 今後の予定
 
-- [ ] 承認履歴の記録
+- [x] 承認履歴の記録
 - [ ] データベース連携
 - [ ] Webアプリ化
 - [ ] Pythonによる集計ツールの追加
@@ -47,6 +47,7 @@
 | `RequestStatus.java` | 申請の状態を表すenum |
 | `Employee.java` | 社員クラス |
 | `Role.java` | 役割(一般/上長)を表すenum |
+| `ApprovalHistory.java` | 承認履歴クラス(操作した人・内容・日時を記録) |
 
 ## 動かし方
 
