@@ -1,8 +1,16 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
     public void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Employee yamada = new Employee(1, "山田太郎", Role.STAFF);
+        Employee tanaka = new Employee(2, "田中部長", Role.MANAGER);
+
+        List<Request> requests = new ArrayList<>();
+        int nextID = 1;
+
         boolean running = true;
 
         while(running) {
@@ -21,12 +29,46 @@ public class Menu {
 
             switch (choice) {
                 case 1:
-                    System.out.println("(新規申請は、次の段階で作ります)");
+                    System.out.println("品名：");
+                    String itemName = scanner.next();
+                    System.out.println("金額：");
+                    int amount = scanner.nextInt();
+
+                    Request newRequest = new Request(nextID, yamada, itemName, amount);
+                    requests.add(newRequest);
+                    nextID++;
+
+                    System.out.println("申請(ID：" + newRequest.getID() + ")を作成しました（下書き）");
                     break;
                 
                 case 0:
                     running = false;
                     System.out.println("終了します");
+                    break;
+
+                case 2:
+                    System.out.print("提出する申請のID：");
+                    int id = scanner.nextInt();
+
+                    for(Request r : requests){
+                        if(r.getID() == id ){
+                            r.submit();
+                            System.out.println("提出しました");
+                        }
+                    }
+                    break;
+                
+                case 6:
+                    if(requests.isEmpty()){
+                        System.out.println("申請はまだありません");
+                    } else {
+                        for(Request r : requests){
+                            System.out.println("ID：" + r.getID()
+                            + " / " + r.getItemName()
+                            + " / " + r.getAmount()
+                            + " / " + r.getStatus().getLabel());
+                        }
+                    }
                     break;
 
                 default:
