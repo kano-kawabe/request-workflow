@@ -45,6 +45,15 @@ public class Main {
             System.out.println("エラー: " + e.getMessage());
         }
 
+        Request req5 = new Request(5, yamada, "プリンター", 40000);
+        req5.submit();
+        req5.approve(tanaka);
+        req5.complete(tanaka);
+
+        for (ApprovalHistory h : req5.getHistories()) {
+            System.out.println(h.getFormattedDateTime() + " " + h.getActor().getName() + " " + h.getAction());
+        }
+        
         try {
             req4.reject(tanaka);   // 自分の申請を自分で差し戻す → エラーになるはず
         } catch (IllegalStateException e) {
