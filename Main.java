@@ -53,6 +53,15 @@ public class Main {
         for (ApprovalHistory h : req5.getHistories()) {
             System.out.println(h.getFormattedDateTime() + " " + h.getActor().getName() + " " + h.getAction());
         }
+
+        Request req6 = new Request(6, yamada, "プリンター", 40000);
+        req6.submit();
+        req6.approve(tanaka);
+        try {
+            req6.complete(yamada);   // 一般社員 → エラーになるはず
+        } catch (IllegalStateException e) {
+            System.out.println("エラー: " + e.getMessage());
+        }
         
         try {
             req4.reject(tanaka);   // 自分の申請を自分で差し戻す → エラーになるはず
@@ -61,11 +70,11 @@ public class Main {
         }
 
         for (ApprovalHistory h : req.getHistories()) {
-            System.out.println(h.getDateTime() + " " + h.getActor().getName() + " " + h.getAction());
+            System.out.println(h.getFormattedDateTime() + " " + h.getActor().getName() + " " + h.getAction());
         }
 
         for (ApprovalHistory h : req2.getHistories()) {
-            System.out.println(h.getDateTime() + " " + h.getActor().getName() + " " + h.getAction());
+            System.out.println(h.getFormattedDateTime() + " " + h.getActor().getName() + " " + h.getAction());
         }
 
         for (ApprovalHistory h : req.getHistories()){

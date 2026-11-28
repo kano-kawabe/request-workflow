@@ -69,10 +69,15 @@ public class Request {
 
     // 完了にする（承認済みのときだけ）
     public void complete(Employee approver){
-        if(status !=RequestStatus.APPROVED){
+        if(!approver.isManager()){
             throw new IllegalStateException(
-                "「" + status.getLabel() + "」の申請は完了にできません");
+            approver.getName() + "さんは上長ではないため完了にできません");
         }
+        if(status != RequestStatus.APPROVED){
+            throw new IllegalStateException(
+            "「" + status.getLabel() + "」の申請は完了にできません");
+        }
+        
         status = RequestStatus.COMPLETED;
         histories.add(new ApprovalHistory(approver,"完了"));
     }
