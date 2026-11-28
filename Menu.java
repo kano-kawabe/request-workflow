@@ -93,6 +93,22 @@ public class Menu {
                         }
                     }
                     break;
+
+                case 5:
+                    System.out.print("完了にする申請のID：");
+                    int completedId = scanner.nextInt();
+
+                    for(Request r : requests){
+                        if(r.getID() == completedId ){
+                            try{
+                                r.complete(tanaka);
+                                System.out.println("完了にしました");
+                            } catch(IllegalStateException e){
+                                System.out.println("エラー：" + e.getMessage());
+                            }
+                        }
+                    }
+                    break;
                 
                 case 6:
                     if(requests.isEmpty()){
