@@ -52,8 +52,12 @@ public class Menu {
 
                     for(Request r : requests){
                         if(r.getID() == id ){
-                            r.submit();
-                            System.out.println("提出しました");
+                            try{
+                                r.submit();
+                                System.out.println("提出しました");
+                            } catch(IllegalStateException e){
+                                System.out.println("エラー：" + e.getMessage());
+                            }
                         }
                     }
                     break;
