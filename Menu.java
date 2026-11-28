@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Menu {
     public void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "MS932");
         Employee yamada = new Employee(1, "山田太郎", Role.STAFF);
         Employee tanaka = new Employee(2, "田中部長", Role.MANAGER);
 
@@ -61,6 +61,22 @@ public class Menu {
                         }
                     }
                     break;
+
+                case 3:
+                    System.out.print("提出する申請のID：");
+                    int approveId = scanner.nextInt();
+
+                    for(Request r : requests){
+                        if(r.getID() == approveId ){
+                            try{
+                                r.approve(tanaka);
+                                System.out.println("承認しました");
+                            } catch(IllegalStateException e){
+                                System.out.println("エラー：" + e.getMessage());
+                            }
+                        }
+                    }
+                    break;
                 
                 case 6:
                     if(requests.isEmpty()){
@@ -69,14 +85,13 @@ public class Menu {
                         for(Request r : requests){
                             System.out.println("ID：" + r.getID()
                             + " / " + r.getItemName()
-                            + " / " + r.getAmount()
+                            + " / " + r.getAmount() + "円"
                             + " / " + r.getStatus().getLabel());
                         }
                     }
                     break;
-
-                default:
-                    System.out.println("1~6か0を入力してください");
+                    default:
+                        System.out.println("1~6か0を入力してください");
                     break;
             }
         } 
