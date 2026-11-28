@@ -63,7 +63,7 @@ public class Menu {
                     break;
 
                 case 3:
-                    System.out.print("提出する申請のID：");
+                    System.out.print("承認する申請のID：");
                     int approveId = scanner.nextInt();
 
                     for(Request r : requests){
@@ -71,6 +71,22 @@ public class Menu {
                             try{
                                 r.approve(tanaka);
                                 System.out.println("承認しました");
+                            } catch(IllegalStateException e){
+                                System.out.println("エラー：" + e.getMessage());
+                            }
+                        }
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("差し戻す申請のID：");
+                    int rejectedId = scanner.nextInt();
+
+                    for(Request r : requests){
+                        if(r.getID() == rejectedId ){
+                            try{
+                                r.reject(tanaka);
+                                System.out.println("差し戻しました");
                             } catch(IllegalStateException e){
                                 System.out.println("エラー：" + e.getMessage());
                             }
